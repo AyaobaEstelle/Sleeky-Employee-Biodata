@@ -1,46 +1,18 @@
 "use client"
 
-interface EmployeeFormProps{
+import { formConfig } from "@/app/utils/form-config";
+import { useRef } from "react";
+import { useFormStatus } from "react-dom";
+import { Loader2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
+
+interface EmployeeFormProps {
   addEmployee: (formData: FormData) => Promise<void>
 }
 
-export const formConfig = [
-  { label: "First Name", type: "text", name: "firstName" },
-  { label: "Last Name", type: "text", name: "lastName" },
-  { label: "Email", type: "email", name: "email" },
-  { label: "Address", type: "text", name: "houseAddress" },
-  { label: "Phone Number", type: "tel", name: "phone" },
-  {
-    label: "Emergency Contact Number",
-    type: "tel",
-    name: "emergencyContact",
-  },
-  { label: "Bank Name", type: "text", name: "bankName" },
-  {
-    label: "Bank Account Number",
-    type: "text",
-    name: "bankAccountNumber",
-  },
-  { label: "Account Name", type: "text", name: "accountName" },
-  { label: "Next of Kin (NOK) Name", type: "text", name: "nokName" },
-  { label: "(NOK) Phone Number", type: "tel", name: "nokNumber" },
-  {
-    label: "(NOK) Relationship",
-    type: "text",
-    name: "nokRelationship",
-  },
-  { label: "Role", type: "text", name: "role" },
-  { label: "Employment Start Date", type: "date", name: "startDate" },
-  { label: "Date of Birth", type: "date", name: "birthday" },
-  {
-    label: "Educational Level",
-    type: "text",
-    name: "educationLevel",
-  },
-];
 
-
-const EmployeeForm = ({addEmployee}: EmployeeFormProps) => {
+const EmployeeForm = ({ addEmployee }: EmployeeFormProps) => {
   const employee = {
     firstName: "",
     lastName: "",
@@ -60,10 +32,20 @@ const EmployeeForm = ({addEmployee}: EmployeeFormProps) => {
     educationLevel: "",
   };
 
-  
+  const formRef = useRef<HTMLFormElement | null>(null)
+  const { toast } = useToast()
+
   return (
     <div className=" font-serif">
-      <form action={addEmployee}  className="max-w-xl mx-auto p-6 rounded shadow-md">
+      <form ref={formRef}
+        action={async (formData: FormData) => {
+          await addEmployee(formData)
+          formRef.current?.reset()
+          toast({
+            title: "Successful",
+            description: "The Employee data has been added",
+          })
+        }} className="max-w-xl mx-auto p-6 rounded shadow-md">
         <h1 className=" flex justify-center text-4xl font-bold mb-7 uppercase">
           Sleeky Programmers
         </h1>
@@ -87,15 +69,25 @@ const EmployeeForm = ({addEmployee}: EmployeeFormProps) => {
             </div>
           ))}
         </div>
-        <button
-          type="submit"
-          className="w-full bg-green-700 hover:bg-green-900  text-white py-2 rounded"
-        >
-          Submit
-        </button>
+        <SubmitButton />
       </form>
     </div>
   );
 };
+
+
+function SubmitButton() {
+  const { pending } = useFormStatus()
+  return (
+    <Button disabled={pending}>
+      {pending ?
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null
+      }
+
+      {pending ? 'Saving' : 'Save'}
+    </Button>
+  )
+}
+
 
 export default EmployeeForm;

@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
         "Biodata"
-    ]
+    ],
+    "prettier.bracketSameLine": true,
+    "prettier.enableDebugLogs": true,
+    "cSpell.enabled": false
 }
