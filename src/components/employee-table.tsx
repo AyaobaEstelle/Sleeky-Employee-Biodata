@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Employee } from "@/app/utils/types";
+import Link from "next/link";
 
 interface EmployeeTableProps {
   data: Employee[]
@@ -18,10 +19,10 @@ const EmployeeTable = ({ data }: EmployeeTableProps) => {
 
   return (
     <div className="mx-auto bg-white p-6">
-      <h2 className="text-2xl font-bold mb-6">Employee List</h2>
+      <h1 className="text-2xl font-bold mb-6">Sleeky Employees</h1>
       <Card>
         <CardHeader>
-          <CardTitle>Recent Sales</CardTitle>
+          <CardTitle>Employee List</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-8">
           {data.map((employee) => (
@@ -31,7 +32,9 @@ const EmployeeTable = ({ data }: EmployeeTableProps) => {
               </Avatar>
               <div className="grid gap-1">
                 <p className="text-sm font-medium leading-none">
-                  {`${employee.firstName} ${employee.lastName}`}
+                  <Link href={`/employee/${employee.id}`}>
+                    {`${employee.firstName} ${employee.lastName}`}
+                  </Link>
                 </p>
                 <p className="text-sm text-muted-foreground">
                   {employee.email}
