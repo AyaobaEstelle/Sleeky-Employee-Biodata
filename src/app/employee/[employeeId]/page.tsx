@@ -79,7 +79,9 @@ const EmployeeDetailsPage = ({
               <p>{employee?.educationLevel}</p>
             </div>
             <div className="flex gap-4 py-6">
-              <Button>Edit</Button>
+              <Link href={`/employee/edit/${params.employeeId}`}>
+                <Button>Edit</Button>
+              </Link>
               <Button
                 disabled={isDeletingEmployee}
                 onClick={() => deleteEmployee()}>

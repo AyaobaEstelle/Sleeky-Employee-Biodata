@@ -1,7 +1,16 @@
 
 export const formConfig = [
-  { label: "First Name", type: "text", name: "firstName" },
-  { label: "Last Name", type: "text", name: "lastName" },
+  { 
+    label: "First Name",
+     type: "text", 
+     name: "firstName",
+
+   },
+  { 
+    label: "Last Name",
+    type: "text", 
+    name: "lastName",
+   },
   { label: "Email", type: "email", name: "email" },
   { label: "Address", type: "text", name: "houseAddress" },
   { label: "Phone Number", type: "tel", name: "phone" },
