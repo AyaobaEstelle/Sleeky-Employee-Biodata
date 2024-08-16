@@ -1,4 +1,7 @@
+import { ReactNode } from "react"
+
 export interface Employee {
+    [x: string]: ReactNode
     id: string
     bankAccountNumber: string
     nokNumber: string

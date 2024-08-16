@@ -36,7 +36,7 @@ const EmployeeForm = ({ addEmployee }: EmployeeFormProps) => {
   const { toast } = useToast()
 
   return (
-    <div className=" font-serif">
+    <div className="">
       <form ref={formRef}
         action={async (formData: FormData) => {
           await addEmployee(formData)
@@ -45,7 +45,7 @@ const EmployeeForm = ({ addEmployee }: EmployeeFormProps) => {
             title: "Successful",
             description: "The Employee data has been added",
           })
-        }} className="max-w-xl mx-auto p-6 rounded shadow-md">
+        }} className="max-w-xl mx-auto p-6">
         <h1 className=" flex justify-center text-4xl font-bold mb-7 uppercase">
           Sleeky Programmers
         </h1>

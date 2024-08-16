@@ -42,7 +42,6 @@ const useDeleteEmployee = (params?: any) => {
       toast("Employee Deleted Successfully", {
         type: "success",
         position: "top-right",
-        autoClose: 2000,
         onClose: () => {
           router.push("/employee/home-page");
         },
